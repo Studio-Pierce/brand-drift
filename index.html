@@ -130,6 +130,18 @@ async function runAudit() {
     document.getElementById('brandTitle').textContent = audit.brand;
     document.getElementById('auditMeta').textContent = `BRAND AUDIT — ${new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }).toUpperCase()}`;
     document.getElementById('scoreSummary').textContent = audit.score_summary;
+   if (audit.confidence) {
+  const bar = document.getElementById('confidenceBar');
+  const indicator = document.getElementById('confidenceIndicator');
+  const note = document.getElementById('confidenceNote');
+  const colors = { high: 'rgba(100,200,120,0.15)', medium: 'rgba(200,169,110,0.15)', low: 'rgba(200,80,80,0.15)' };
+  const textColors = { high: '#64C878', medium: '#C8A96E', low: '#C85050' };
+  indicator.style.background = colors[audit.confidence] || colors.medium;
+  indicator.style.color = textColors[audit.confidence] || textColors.medium;
+  indicator.textContent = audit.confidence.toUpperCase() + ' CONFIDENCE';
+  note.textContent = audit.confidence_note || '';
+  bar.style.display = 'block';
+}
     document.getElementById('verdict').textContent = audit.verdict;
     document.getElementById('driftText').textContent = audit.drift_signal;
     const grid = document.getElementById('dimensionsGrid');
