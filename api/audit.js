@@ -18,7 +18,7 @@ Scoring bands:
 - 30-49: Significant drift.
 - Below 30: Broken.
 
-Most brands score 40-65. Be ruthless. If the commentary is critical, the score musst reflect that - a brand with signifiacnt problems cannot score above 65. Words and numbers must agree or the audit is worthless.
+Most brands score 40-65. Be ruthless. If the commentary is critical, the score must reflect that — a brand with significant problems cannot score above 65. Words and numbers must agree or the audit is worthless.
 
 Respond ONLY with valid JSON, no markdown:
 
