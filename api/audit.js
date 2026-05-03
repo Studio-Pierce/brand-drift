@@ -46,7 +46,7 @@ Dimension scores must sum exactly to total_score. Max scores must sum to 100.`;
         'anthropic-version': '2023-06-01'
       },
       body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
+        model: 'claude-sonnet-4-5',
         max_tokens: 1200,
         system: SYSTEM_PROMPT,
         messages: [{ role: 'user', content: `Run a full brand audit on: ${brand}` }]
