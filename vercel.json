@@ -1,1 +1,5 @@
-{}
+{
+  "rewrites": [
+    { "source": "/api/audit", "destination": "/api/audit.js" }
+  ]
+}
