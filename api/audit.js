@@ -11,16 +11,9 @@ module.exports = async function handler(req, res) {
   const brand = body && body.brand;
   if (!brand) return res.status(400).json({ error: 'Brand name required' });
   const SYSTEM_PROMPT = `You are a senior brand strategist and creative director with 25 years of experience. You have a sharp, direct, intelligent voice — not corporate, not generic. You assess brands with precision and honesty.
-When given a brand name, search for current information and draw on what you find across: their website and messaging, visual identity, tone of voice, social media presence, press coverage, employer reputation (Glassdoor signals), and any notable brand moments or controversies.
-Scoring bands — be ruthless and use the full range:
-- 85-100: Exceptional. Apple, Nike, Patagonia level.
-- 70-84: Strong with minor issues.
-- 50-69: Average. Real problems exist.
-- 30-49: Significant drift.
-- Below 30: Broken.
-Most brands score 40-65. If your commentary is critical, the score must reflect it. Words and numbers must agree.
+When given a brand name, draw on your knowledge of that brand across: their website and messaging, visual identity, tone of voice, social media presence, press coverage, employer reputation (Glassdoor signals), and any notable brand moments or controversies.
 Respond ONLY with a valid JSON object — no markdown, no preamble, no explanation outside the JSON.
-{"brand":"Brand Name","total_score":52,"score_summary":"Four words max — e.g. Confident but losing edge","verdict":"2-3 sentences. Sharp, honest, specific. No waffle. Write like a smart creative director talking to a peer.","dimensions":[{"name":"Clarity","score":14,"max":17,"note":"One sharp, specific sentence."},{"name":"Distinctiveness","score":12,"max":17,"note":"One sharp, specific sentence."},{"name":"Visual consistency","score":11,"max":17,"note":"One sharp, specific sentence."},{"name":"Tone of voice","score":13,"max":17,"note":"One sharp, specific sentence."},{"name":"Audience fit","score":10,"max":16,"note":"One sharp, specific sentence."},{"name":"Culture & internal brand","score":12,"max":16,"note":"One sharp sentence — reference employer signals, job ad language, how they talk about their people."}],"drift_signal":"The single most important thing this brand needs to fix. Specific, actionable, uncomfortable if necessary."}
+{"brand":"Brand Name","total_score":72,"score_summary":"Four words max — e.g. Confident but losing edge","verdict":"2-3 sentences. Sharp, honest, specific. No waffle. Write like a smart creative director talking to a peer.","dimensions":[{"name":"Clarity","score":14,"max":17,"note":"One sharp, specific sentence."},{"name":"Distinctiveness","score":12,"max":17,"note":"One sharp, specific sentence."},{"name":"Visual consistency","score":11,"max":17,"note":"One sharp, specific sentence."},{"name":"Tone of voice","score":13,"max":17,"note":"One sharp, specific sentence."},{"name":"Audience fit","score":10,"max":16,"note":"One sharp, specific sentence."},{"name":"Culture & internal brand","score":12,"max":16,"note":"One sharp sentence — reference employer signals, job ad language, how they talk about their people."}],"drift_signal":"The single most important thing this brand needs to fix. Specific, actionable, uncomfortable if necessary."}
 Dimension scores must sum exactly to total_score. Max scores must sum to 100.`;
   try {
     const response = await fetch('https://api.anthropic.com/v1/messages', {
@@ -32,10 +25,9 @@ Dimension scores must sum exactly to total_score. Max scores must sum to 100.`;
       },
       body: JSON.stringify({
         model: 'claude-sonnet-4-5',
-        max_tokens: 4000,
+        max_tokens: 1200,
         system: SYSTEM_PROMPT,
-        tools: [{ type: "web_search_20250305", name: "web_search" }],
-        messages: [{ role: 'user', content: `Search for current information about this brand then run a full audit: ${brand}` }]
+        messages: [{ role: 'user', content: `Run a full brand audit on: ${brand}` }]
       })
     });
     if (!response.ok) {
@@ -43,8 +35,7 @@ Dimension scores must sum exactly to total_score. Max scores must sum to 100.`;
       return res.status(response.status).json({ error: err });
     }
     const data = await response.json();
-    const textBlock = data.content.find(b => b.type === 'text');
-    const raw = textBlock.text.replace(/```json|```/g, '').trim();
+    const raw = data.content[0].text.replace(/```json|```/g, '').trim();
     const audit = JSON.parse(raw);
     return res.status(200).json(audit);
   } catch (err) {
