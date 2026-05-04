@@ -21,11 +21,11 @@ Scoring bands — be ruthless and use the full range:
 - 30-49: Significant drift.
 - Below 30: Broken.
 
-Most brands score 40-65. If your commentary is critical, the score must reflect it. Words and numbers must agree. Do not confuse brand recognition or fame with brand health — a well-known brand can still be drifting badly and should be scored accordingly. Nike, McDonald's, and similar giants should not automatically score highly if their brand is showing signs of drift or dilution.
+Most brands score 40-65. If your commentary is critical, the score must reflect it. Words and numbers must agree. Do not confuse brand recognition or fame with brand health — a well-known brand can still be drifting badly and should be scored accordingly.
 
 Respond ONLY with a valid JSON object — no markdown, no preamble, no explanation outside the JSON.
 
-{"brand":"Brand Name","total_score":58,"score_summary":"Four words max — e.g. Confident but losing edge","verdict":"2-3 sentences. Sharp, honest, specific. No waffle. Write like a smart creative director talking to a peer.","dimensions":[{"name":"Clarity","score":12,"max":20,"note":"One sharp, specific sentence."},{"name":"Distinctiveness","score":11,"max":20,"note":"One sharp, specific sentence."},{"name":"Visual consistency","score":12,"max":20,"note":"One sharp, specific sentence."},{"name":"Tone of voice","score":13,"max":20,"note":"One sharp, specific sentence."},{"name":"Audience fit","score":10,"max":20,"note":"One sharp, specific sentence."}],"drift_signal":"The single most important thing this brand needs to fix. Specific, actionable, uncomfortable if necessary."}
+{"brand":"Brand Name","total_score":58,"score_summary":"Four words max","verdict":"2-3 sentences. Sharp, honest, specific. No waffle. Write like a smart creative director talking to a peer.","dimensions":[{"name":"Clarity","score":12,"max":20,"note":"One sharp, specific sentence."},{"name":"Distinctiveness","score":11,"max":20,"note":"One sharp, specific sentence."},{"name":"Visual consistency","score":12,"max":20,"note":"One sharp, specific sentence."},{"name":"Tone of voice","score":13,"max":20,"note":"One sharp, specific sentence."},{"name":"Audience fit","score":10,"max":20,"note":"One sharp, specific sentence."}],"drift_signal":"The single most important thing this brand needs to fix. Specific, actionable, uncomfortable if necessary."}
 
 Dimension scores must sum exactly to total_score. All max scores are 20. Total max is 100.`;
   try {
@@ -50,8 +50,8 @@ Dimension scores must sum exactly to total_score. All max scores are 20. Total m
     const data = await response.json();
     const raw = data.content[0].text.replace(/```json|```/g, '').trim();
     const audit = JSON.parse(raw);
-    // Log to Google Sheets
-    fetch('https://script.google.com/macros/s/AKfycbzgGBzCgM7EzY50uEpV4uKhCqhomKnxQWJQHXMEjM9uMSrQCw4-GbRC-yL6ubPCnvo4YA/execV4uKhCqhomKnxQWJQHXMEjM9uMSrQCw4-GbRC-yL6ubPCnvo4YA/exec', {
+
+    fetch('https://script.google.com/macros/s/AKfycbzgGBzCgM7EzY50uEpV4uKhCqhomKnxQWJQHXMEjM9uMSrQCw4-GbRC-yL6ubPCnvo4YA/exec', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -60,7 +60,7 @@ Dimension scores must sum exactly to total_score. All max scores are 20. Total m
         summary: audit.score_summary,
         drift_signal: audit.drift_signal
       })
-    }).catch(() => {}); // silent fail — don't break the audit if logging fails
+    }).catch(() => {});
 
     return res.status(200).json(audit);
   } catch (err) {
