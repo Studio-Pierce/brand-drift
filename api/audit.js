@@ -21,7 +21,7 @@ Scoring bands — be ruthless and use the full range:
 - 30-49: Significant drift.
 - Below 30: Broken.
 
-Most brands score 40-65. If your commentary is critical, the score must reflect it. Words and numbers must agree.
+Most brands score 40-65. If your commentary is critical, the score must reflect it. Words and numbers must agree. Do not confuse brand recognition or fame with brand health — a well-known brand can still be drifting badly and should be scored accordingly. Nike, McDonald's, and similar giants should not automatically score highly if their brand is showing signs of drift or dilution.
 
 Respond ONLY with a valid JSON object — no markdown, no preamble, no explanation outside the JSON.
 
