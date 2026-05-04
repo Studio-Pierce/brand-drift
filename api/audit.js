@@ -51,16 +51,19 @@ Dimension scores must sum exactly to total_score. All max scores are 20. Total m
     const raw = data.content[0].text.replace(/```json|```/g, '').trim();
     const audit = JSON.parse(raw);
 
-    fetch('https://script.google.com/macros/s/AKfycbzgGBzCgM7EzY50uEpV4uKhCqhomKnxQWJQHXMEjM9uMSrQCw4-GbRC-yL6ubPCnvo4YA/exec', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        brand: audit.brand,
-        score: audit.total_score,
-        summary: audit.score_summary,
-        drift_signal: audit.drift_signal
-      })
-    }).catch(() => {});
+    try {
+      await fetch('https://script.google.com/macros/s/AKfycbzgGBzCgM7EzY50uEpV4uKhCqhomKnxQWJQHXMEjM9uMSrQCw4-GbRC-yL6ubPCnvo4YA/exec', {
+        method: 'POST',
+        redirect: 'follow',
+        headers: { 'Content-Type': 'text/plain' },
+        body: JSON.stringify({
+          brand: audit.brand,
+          score: audit.total_score,
+          summary: audit.score_summary,
+          drift_signal: audit.drift_signal
+        })
+      });
+    } catch(e) {}
 
     return res.status(200).json(audit);
   } catch (err) {
