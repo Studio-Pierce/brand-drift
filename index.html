@@ -234,6 +234,10 @@
   .dimensions {
     display: grid;
     grid-template-columns: 1fr 1fr;
+grid-auto-rows: auto;
+    .dimension:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+}
     gap: 1px;
     background: rgba(10,10,8,0.08);
     margin-top: 1rem;
