@@ -51,7 +51,7 @@ Dimension scores must sum exactly to total_score. All max scores are 20. Total m
     const raw = data.content[0].text.replace(/```json|```/g, '').trim();
     const audit = JSON.parse(raw);
     // Log to Google Sheets
-    fetch('https://script.google.com/a/macros/studiopierce.co.uk/s/AKfycbzgGBzCgM7EzY50uEpV4uKhCqhomKnxQWJQHXMEjM9uMSrQCw4-GbRC-yL6ubPCnvo4YA/exec', {
+    fetch('https://script.google.com/macros/s/AKfycbzgGBzCgM7EzY50uEpV4uKhCqhomKnxQWJQHXMEjM9uMSrQCw4-GbRC-yL6ubPCnvo4YA/execV4uKhCqhomKnxQWJQHXMEjM9uMSrQCw4-GbRC-yL6ubPCnvo4YA/exec', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
