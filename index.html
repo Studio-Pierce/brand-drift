@@ -4,86 +4,388 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Brand Drift-o-Meter — Studio Pierce</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500&display=swap" rel="stylesheet">
 <style>
+  @font-face {
+    font-family: 'Founders Grotesk';
+    src: url('/founders-grotesk-text-light.woff2') format('woff2');
+    font-weight: 300;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Founders Grotesk';
+    src: url('/founders-grotesk-text-light-italic.woff2') format('woff2');
+    font-weight: 300;
+    font-style: italic;
+  }
+  @font-face {
+    font-family: 'Founders Grotesk';
+    src: url('/founders-grotesk-text-semibold.woff2') format('woff2');
+    font-weight: 600;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Founders Grotesk';
+    src: url('/founders-grotesk-text-semibold-italic.woff2') format('woff2');
+    font-weight: 600;
+    font-style: italic;
+  }
+
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Instrument Sans', sans-serif; background: #0A0A08; color: #E8E4DC; min-height: 100vh; }
-  .header { padding: 3rem 3rem 2rem; border-bottom: 0.5px solid rgba(232,228,220,0.12); }
-  .studio-tag { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.15em; color: rgba(232,228,220,0.35); text-transform: uppercase; margin-bottom: 1.5rem; }
-  h1 { font-family: 'DM Serif Display', serif; font-size: clamp(2.2rem, 5vw, 3.8rem); font-weight: 400; line-height: 1.05; color: #E8E4DC; letter-spacing: -0.02em; }
-  h1 em { font-style: italic; color: #C8A96E; }
-  .subtitle { margin-top: 0.75rem; font-size: 14px; color: rgba(232,228,220,0.45); max-width: 420px; line-height: 1.6; }
-  .input-section { padding: 2.5rem 3rem; }
-  .input-wrapper { display: flex; max-width: 580px; border: 0.5px solid rgba(232,228,220,0.2); border-radius: 4px; overflow: hidden; transition: border-color 0.2s; }
-  .input-wrapper:focus-within { border-color: #C8A96E; }
-  .input-wrapper input { flex: 1; background: rgba(232,228,220,0.04); border: none; outline: none; padding: 1rem 1.25rem; font-family: 'Instrument Sans', sans-serif; font-size: 15px; color: #E8E4DC; caret-color: #C8A96E; }
-  .input-wrapper input::placeholder { color: rgba(232,228,220,0.25); }
-  .run-btn { background: #C8A96E; border: none; padding: 1rem 1.5rem; font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.1em; color: #0A0A08; cursor: pointer; transition: background 0.2s, opacity 0.2s; white-space: nowrap; }
-  .run-btn:hover { background: #D4BA84; }
+
+  body {
+    font-family: 'Founders Grotesk', sans-serif;
+    font-weight: 300;
+    background: #F6F0F0;
+    color: #0A0A08;
+    min-height: 100vh;
+  }
+
+  /* HEADER — red background */
+  .header {
+    background: #E71616;
+    padding: 2.5rem 3rem 3rem;
+  }
+
+  .studio-tag {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: rgba(246,240,240,0.6);
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    font-weight: 300;
+  }
+
+  h1 {
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    font-weight: 300;
+    line-height: 1.0;
+    color: #F6F0F0;
+    letter-spacing: -0.02em;
+  }
+
+  h1 em {
+    font-style: italic;
+    font-weight: 300;
+  }
+
+  .subtitle {
+    margin-top: 1rem;
+    font-size: 15px;
+    color: rgba(246,240,240,0.7);
+    max-width: 440px;
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  /* INPUT SECTION */
+  .input-section {
+    background: #F6F0F0;
+    padding: 2.5rem 3rem;
+    border-bottom: 1px solid rgba(10,10,8,0.1);
+  }
+
+  .input-wrapper {
+    display: flex;
+    max-width: 600px;
+    border: 1px solid rgba(10,10,8,0.25);
+    background: #fff;
+  }
+
+  .input-wrapper:focus-within {
+    border-color: #E71616;
+  }
+
+  .input-wrapper input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    padding: 1rem 1.25rem;
+    font-family: 'Founders Grotesk', sans-serif;
+    font-weight: 300;
+    font-size: 15px;
+    color: #0A0A08;
+    caret-color: #E71616;
+  }
+
+  .input-wrapper input::placeholder {
+    color: rgba(10,10,8,0.3);
+  }
+
+  .run-btn {
+    background: #E71616;
+    border: none;
+    padding: 1rem 1.5rem;
+    font-family: 'Founders Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #F6F0F0;
+    cursor: pointer;
+    transition: background 0.2s, opacity 0.2s;
+    white-space: nowrap;
+  }
+
+  .run-btn:hover { background: #CC0000; }
   .run-btn:disabled { opacity: 0.4; cursor: not-allowed; }
-  .status-line { margin-top: 1rem; font-family: 'DM Mono', monospace; font-size: 11px; color: rgba(232,228,220,0.35); letter-spacing: 0.05em; min-height: 1.2em; }
-  .status-line.active { color: #C8A96E; }
-  .error-msg { font-size: 13px; color: rgba(220,100,100,0.8); margin-top: 0.75rem; }
-  .results { padding: 0 3rem 3rem; display: none; }
+
+  .status-line {
+    margin-top: 1rem;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(10,10,8,0.35);
+    min-height: 1.2em;
+  }
+
+  .status-line.active { color: #E71616; }
+
+  .error-msg {
+    font-size: 13px;
+    color: #E71616;
+    margin-top: 0.75rem;
+  }
+
+  /* RESULTS */
+  .results { display: none; }
   .results.visible { display: block; }
-  .brand-title { font-family: 'DM Serif Display', serif; font-size: 1.6rem; font-weight: 400; color: #E8E4DC; margin-bottom: 0.25rem; }
-  .audit-meta { font-family: 'DM Mono', monospace; font-size: 10px; color: rgba(232,228,220,0.3); letter-spacing: 0.1em; margin-bottom: 2rem; }
-  .score-hero { display: flex; align-items: baseline; gap: 0.5rem; margin-bottom: 0.5rem; }
-  .score-number { font-family: 'DM Serif Display', serif; font-size: 5rem; line-height: 1; color: #C8A96E; }
-  .score-denom { font-size: 1.2rem; color: rgba(232,228,220,0.3); }
-  .score-label { font-size: 13px; color: rgba(232,228,220,0.45); margin-bottom: 2rem; font-style: italic; }
-  .verdict { max-width: 560px; font-size: 15px; line-height: 1.75; color: rgba(232,228,220,0.8); margin-bottom: 2.5rem; padding-bottom: 2rem; border-bottom: 0.5px solid rgba(232,228,220,0.1); }
-  .dimensions { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: rgba(232,228,220,0.08); margin-bottom: 2rem; }
-  .dimension { background: #0A0A08; padding: 1.25rem 1.5rem; }
-  .dim-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.5rem; }
-  .dim-name { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.12em; color: rgba(232,228,220,0.4); text-transform: uppercase; }
-  .dim-score { font-family: 'DM Serif Display', serif; font-size: 1.4rem; color: #C8A96E; }
-  .dim-score span { font-size: 0.7rem; color: rgba(232,228,220,0.2); font-family: 'Instrument Sans', sans-serif; }
-  .dim-bar-track { height: 2px; background: rgba(232,228,220,0.08); border-radius: 1px; margin-bottom: 0.6rem; overflow: hidden; }
-  .dim-bar-fill { height: 100%; background: #C8A96E; border-radius: 1px; transition: width 1s ease; }
-  .dim-note { font-size: 12px; color: rgba(232,228,220,0.45); line-height: 1.5; }
-  .drift-signal { border: 0.5px solid rgba(200,169,110,0.25); padding: 1.25rem 1.5rem; margin-bottom: 2rem; }
-  .drift-signal-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.12em; color: #C8A96E; text-transform: uppercase; margin-bottom: 0.5rem; }
-  .drift-signal-text { font-size: 13px; color: rgba(232,228,220,0.6); line-height: 1.6; }
-  .footer-tag { font-family: 'DM Mono', monospace; font-size: 10px; color: rgba(232,228,220,0.15); letter-spacing: 0.1em; text-transform: uppercase; }
+
+  .results-header {
+    background: #E71616;
+    padding: 2.5rem 3rem;
+  }
+
+  .brand-title {
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    font-weight: 300;
+    color: #F6F0F0;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.25rem;
+  }
+
+  .audit-meta {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: rgba(246,240,240,0.5);
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+
+  .score-hero {
+    display: flex;
+    align-items: baseline;
+    gap: 0.4rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .score-number {
+    font-size: clamp(4rem, 10vw, 7rem);
+    font-weight: 300;
+    line-height: 1;
+    color: #F6F0F0;
+    letter-spacing: -0.03em;
+  }
+
+  .score-denom {
+    font-size: 1.5rem;
+    color: rgba(246,240,240,0.4);
+    font-weight: 300;
+  }
+
+  .score-label {
+    font-size: 13px;
+    color: rgba(246,240,240,0.6);
+    font-style: italic;
+    font-weight: 300;
+  }
+
+  /* VERDICT */
+  .verdict-section {
+    background: #F6F0F0;
+    padding: 2.5rem 3rem;
+    border-bottom: 1px solid rgba(10,10,8,0.08);
+  }
+
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #E71616;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+  }
+
+  .verdict {
+    font-size: 16px;
+    line-height: 1.75;
+    color: #0A0A08;
+    max-width: 600px;
+    font-weight: 300;
+  }
+
+  /* DIMENSIONS */
+  .dimensions-section {
+    background: #F6F0F0;
+    padding: 2.5rem 3rem;
+    border-bottom: 1px solid rgba(10,10,8,0.08);
+  }
+
+  .dimensions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: rgba(10,10,8,0.08);
+    margin-top: 1rem;
+  }
+
+  .dimension {
+    background: #F6F0F0;
+    padding: 1.25rem 1.5rem;
+  }
+
+  .dim-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 0.5rem;
+  }
+
+  .dim-name {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: rgba(10,10,8,0.4);
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  .dim-score {
+    font-size: 1.6rem;
+    color: #E71616;
+    font-weight: 300;
+    letter-spacing: -0.02em;
+  }
+
+  .dim-score span {
+    font-size: 0.7rem;
+    color: rgba(10,10,8,0.25);
+  }
+
+  .dim-bar-track {
+    height: 1px;
+    background: rgba(10,10,8,0.1);
+    margin-bottom: 0.6rem;
+    overflow: hidden;
+  }
+
+  .dim-bar-fill {
+    height: 100%;
+    background: #E71616;
+    transition: width 1s ease;
+  }
+
+  .dim-note {
+    font-size: 12px;
+    color: rgba(10,10,8,0.55);
+    line-height: 1.5;
+    font-weight: 300;
+  }
+
+  /* DRIFT SIGNAL */
+  .drift-section {
+    background: #0A0A08;
+    padding: 2.5rem 3rem;
+  }
+
+  .drift-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #E71616;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+  }
+
+  .drift-text {
+    font-size: 15px;
+    color: #F6F0F0;
+    line-height: 1.7;
+    max-width: 600px;
+    font-weight: 300;
+  }
+
+  /* FOOTER */
+  .footer {
+    background: #F6F0F0;
+    padding: 1.5rem 3rem;
+    border-top: 1px solid rgba(10,10,8,0.08);
+  }
+
+  .footer-tag {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(10,10,8,0.2);
+  }
+
   @media (max-width: 600px) {
-    .header, .input-section, .results { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .header, .input-section, .results-header, .verdict-section, .dimensions-section, .drift-section, .footer {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
     .dimensions { grid-template-columns: 1fr; }
-    .score-number { font-size: 3.5rem; }
+    .score-number { font-size: 4rem; }
   }
 </style>
 </head>
 <body>
+
 <div class="header">
   <div class="studio-tag">Studio Pierce — Brand Drift-o-Meter</div>
   <h1>How far has your<br>brand <em>drifted?</em></h1>
   <p class="subtitle">Type in any brand name. We'll find it, read it, and tell you where it's lost the thread.</p>
 </div>
+
 <div class="input-section">
   <div class="input-wrapper">
     <input type="text" id="brandInput" placeholder="e.g. Patagonia, Monzo, your own brand..." />
-    <button class="run-btn" id="runBtn" onclick="runAudit()">RUN AUDIT →</button>
+    <button class="run-btn" id="runBtn">RUN AUDIT →</button>
   </div>
   <div class="status-line" id="statusLine"></div>
   <div class="error-msg" id="errorMsg"></div>
 </div>
+
 <div class="results" id="results">
-  <div class="brand-title" id="brandTitle"></div>
-  <div class="audit-meta" id="auditMeta"></div>
-  <div class="score-hero">
-    <div class="score-number" id="totalScore">—</div>
-    <div class="score-denom">/100</div>
+  <div class="results-header">
+    <div class="audit-meta" id="auditMeta"></div>
+    <div class="brand-title" id="brandTitle"></div>
+    <div class="score-hero">
+      <div class="score-number" id="totalScore">—</div>
+      <div class="score-denom">/100</div>
+    </div>
+    <div class="score-label" id="scoreSummary"></div>
   </div>
-  <div class="score-label" id="scoreSummary"></div>
-  <div class="verdict" id="verdict"></div>
-  <div class="dimensions" id="dimensionsGrid"></div>
-  <div class="drift-signal">
-    <div class="drift-signal-label">Primary drift signal</div>
-    <div class="drift-signal-text" id="driftText"></div>
+
+  <div class="verdict-section">
+    <div class="section-label">Audit verdict</div>
+    <div class="verdict" id="verdict"></div>
   </div>
-  <div class="footer-tag">Studio Pierce — Brand audit experiment</div>
+
+  <div class="dimensions-section">
+    <div class="section-label">Dimension scores</div>
+    <div class="dimensions" id="dimensionsGrid"></div>
+  </div>
+
+  <div class="drift-section">
+    <div class="drift-label">Primary drift signal</div>
+    <div class="drift-text" id="driftText"></div>
+  </div>
+
+  <div class="footer">
+    <div class="footer-tag">Studio Pierce — Brand audit experiment</div>
+  </div>
 </div>
+
 <script>
 function animateScore(el, target) {
   let start = null;
@@ -123,7 +425,7 @@ async function runAudit() {
     status.className = 'status-line';
     status.textContent = 'Audit complete.';
     document.getElementById('brandTitle').textContent = audit.brand;
-    document.getElementById('auditMeta').textContent = `BRAND AUDIT — ${new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }).toUpperCase()}`;
+    document.getElementById('auditMeta').textContent = `Brand Audit — ${new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }).toUpperCase()}`;
     document.getElementById('scoreSummary').textContent = audit.score_summary;
     document.getElementById('verdict').textContent = audit.verdict;
     document.getElementById('driftText').textContent = audit.drift_signal;
@@ -150,6 +452,7 @@ async function runAudit() {
 }
 
 document.getElementById('brandInput').addEventListener('keydown', e => { if (e.key === 'Enter') runAudit(); });
+document.getElementById('runBtn').addEventListener('click', runAudit);
 </script>
 </body>
 </html>
